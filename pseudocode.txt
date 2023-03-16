@@ -1,0 +1,59 @@
+===== PROGRAM Sistem perpustakaan (peminjaman dan pengembalian buku) =====
+
+READ AND WRITE "command" with number
+READ AND WRITE "quantity" with number
+READ AND WRITE "id_book" with number
+READ AND WRITE "borrow_book" with list
+READ AND WRITE "index" with number
+READ AND WRITE "return_date" with number
+
+===== BORROW BOOK FUNCTION =====
+borrowBook(){
+      GET "quantity" from user input
+      STORE "index" with 0
+
+      WHILE "index" < "quantity"
+            GET "id_book" from user input
+            STORE borrow_book.append(id_book)
+            STORE "index" with adding by 1
+      END WHILE
+
+      STORE "return_date" with current date + 7 day
+      print "please return the book before" return_date
+}
+
+===== RETURN BOOK FUNCTION =====
+returnBook(){
+      GET "quantity" from user input
+      IF "quantity" not equal with "len(borrow_book)"
+            print "returned books are less than those that have been borrowed!!!"
+      ELSE
+            STORE "index" with 0
+            
+            WHILE "index" < "quantity"
+                    GET "id_book" from user input
+
+                    IF "id_book" not in borrow_book[]
+                            print "returned books do not match!!!"
+                    ELSE
+                            REMOVE borrow_book.remove(id_book)
+                    END IF
+
+                    STORE "index" with adding by 1
+            END WHILE
+
+            print "Thank you"
+      END IF
+}
+
+===== MAIN FUNCTION =====
+GET "command" from user input
+
+IF "command" == 1
+      borrowBook()
+ELSE IF "command" == 2
+      returnBook()
+ELSE
+      print "command not valid!"
+END IF
+
